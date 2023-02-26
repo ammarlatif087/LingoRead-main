@@ -1,20 +1,12 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:math' as math;
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lingoread/Controllers/Theme/themecontroller.dart';
-import 'package:lingoread/Pages/introduction.dart';
 import 'package:lingoread/Services/postRequests.dart';
-import 'package:lingoread/Utils/Theme/decoration.dart';
-import 'package:lingoread/Utils/Theme/theme.dart';
-import 'package:lingoread/Widgets/Buttons/buttongoogle.dart';
 import 'package:lingoread/Widgets/Main/custom_container.dart';
-import 'package:lingoread/Widgets/Main/footer.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,8 +14,6 @@ import '../Routes/routes_names.dart';
 import '../Utils/app_constants.dart';
 import '../Utils/app_funtions.dart';
 import '../Widgets/Buttons/button_main.dart';
-import '../Widgets/Buttons/buttonfb.dart';
-import '../Widgets/TextField/myTextFromField.dart';
 
 class OTPVerification extends StatefulWidget {
   const OTPVerification({Key? key}) : super(key: key);

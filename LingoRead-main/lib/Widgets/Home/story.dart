@@ -132,9 +132,10 @@ class _StoryState extends State<Story> {
               Positioned(
                 bottom: 0,
                 left: 0,
+                right: 0,
                 child: Container(
-                  height: 87,
-                  width: 340,
+                  height: getProportionateScreenHeight(87),
+                  //  width: getProportionateScreenWidth(320),
                   decoration: BoxDecoration(
                     color: const Color(0XFF18A5D3).withOpacity(0.6),
                     borderRadius: BorderRadius.circular(20),

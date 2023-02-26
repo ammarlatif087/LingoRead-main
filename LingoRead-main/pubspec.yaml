@@ -21,7 +21,7 @@ dependencies:
   firebase_core: ^2.6.1
   firebase_auth: ^4.2.8
   pin_code_fields: ^7.4.0
-  shared_preferences: ^2.0.15
+  shared_preferences: ^2.0.18
   flutter_overlay_loader: ^2.0.0
   carousel_slider: ^4.1.1 
   intl: ^0.17.0

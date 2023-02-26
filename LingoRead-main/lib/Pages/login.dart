@@ -8,7 +8,6 @@ import 'package:lingoread/Controllers/Theme/profileController.dart';
 import 'package:lingoread/Utils/app_funtions.dart';
 import 'package:lingoread/Widgets/Buttons/buttongoogle.dart';
 import 'package:lingoread/Widgets/Main/custom_container.dart';
-import 'package:lingoread/Widgets/Main/footer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Routes/routes_names.dart';
 import '../Services/postRequests.dart';
