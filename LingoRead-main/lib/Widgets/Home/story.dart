@@ -89,6 +89,23 @@ class _StoryState extends State<Story> {
         ),
         // padding: EdgeInsets.all(AppConst.padding * 0.5),
         decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFF5A6CEA).withOpacity(0.2),
+              // offset: const Offset(
+              //   5.0,
+              //   5.0,
+              // ),
+              blurRadius: 5.0,
+              spreadRadius: 2.0,
+            ), //BoxShadow
+            const BoxShadow(
+              color: Colors.white,
+              // offset: Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ), //BoxShadow
+          ],
           image: DecorationImage(
               image: NetworkImage(widget.story["image"].contains("http")
                   ? widget.story["image"]
@@ -113,8 +130,8 @@ class _StoryState extends State<Story> {
           child: Stack(
             children: <Widget>[
               Positioned(
-                bottom: 1,
-                left: 1,
+                bottom: 0,
+                left: 0,
                 child: Container(
                   height: 87,
                   width: 340,
@@ -129,19 +146,24 @@ class _StoryState extends State<Story> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextWidgetHeading(
+                          maxLine: 2,
                           overflow: TextOverflow.ellipsis,
                           textAlignment: TextAlign.left,
                           titleHeading: widget.story["title"].toString(),
                           textStyle: GoogleFonts.sora(
-                            textStyle: const TextStyle(
-                              fontSize: 15,
+                            textStyle: TextStyle(
+                              fontSize: getProportionateScreenHeight(15),
                               fontWeight: FontWeight.w600,
                               color: kPrimaryColor,
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: getProportionateScreenHeight(8),
+                        ),
                         TextWidgetHeading(
                           textAlignment: TextAlign.left,
+                          maxLine: 2,
                           overflow: TextOverflow.ellipsis,
                           titleHeading: widget.story["description"].toString(),
                           textStyle: GoogleFonts.sora(
@@ -168,8 +190,31 @@ class _StoryState extends State<Story> {
                 top: 10,
                 right: 50,
                 child: InkWell(
-                    onTap: () {},
-                    child: const Icon(Icons.favorite, color: Colors.red)),
+                  onTap: () {
+                    if (favController.checkIfAddedtoFav(
+                            (widget.story ?? {})["id"] ?? "0") ==
+                        -1) {
+                      favController.addtoFav((widget.story ?? {})["id"] ?? "",
+                          isFavScreen: true);
+                    } else {
+                      favController.removeFromFav(
+                          (widget.story ?? {})["id"] ?? "",
+                          isFavScreen: true);
+                    }
+                  },
+                  child: Icon(
+                    favController.checkIfAddedtoFav(
+                                (widget.story ?? {})["id"] ?? "0") ==
+                            -1
+                        ? Icons.favorite_border
+                        : Icons.favorite,
+                    color: favController.checkIfAddedtoFav(
+                                (widget.story ?? {})["id"] ?? "0") ==
+                            -1
+                        ? const Color(0XFFBEC3D0)
+                        : Colors.red,
+                  ),
+                ),
               ),
             ],
           ),

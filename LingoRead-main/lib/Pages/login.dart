@@ -48,7 +48,6 @@ class _LoginState extends State<Login> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          ThemeFooter(),
           Padding(
             padding: EdgeInsets.fromLTRB(AppConst.padding * 2,
                 AppConst.padding * 3, AppConst.padding * 2, 0),
@@ -160,8 +159,8 @@ class _LoginState extends State<Login> {
                               SizedBox(height: AppConst.padding * 0.5),
                               isSendingMessageGuest
                                   ? Container(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 12),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 12),
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(
                                               AppConst.padding * 0.25),
@@ -195,7 +194,7 @@ class _LoginState extends State<Login> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("Don't Have An Account? ",
+                                  const Text("Don't Have An Account? ",
                                       style: TextStyle(
                                           color: kTextColorSecondary)),
                                   InkWell(
@@ -236,7 +235,7 @@ class _LoginState extends State<Login> {
 
   Container loadingwidget() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppConst.padding * 0.25),
           color: Theme.of(context).primaryColor),

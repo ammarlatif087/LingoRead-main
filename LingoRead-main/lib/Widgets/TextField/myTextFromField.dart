@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lingoread/Utils/app_constants.dart';
 import 'package:lingoread/Utils/constants.dart';
 
 import '../../Utils/size_config.dart';
@@ -32,34 +30,37 @@ class MyTextFormField extends StatelessWidget {
   final bool isAutoFocus;
   final bool newheight;
   final FocusNode? focusNode;
+  final TextStyle? textStyle;
 
   final TextEditingController? controller;
 
-  MyTextFormField(
-      {this.hintText,
-      this.validator,
-      this.onSaved,
-      this.helpText,
-      this.onChange,
-      this.onTap,
-      this.isPassword = false,
-      this.isEmail = false,
-      this.isEnabled = true,
-      this.isRequired = false,
-      this.isshowHelp = false,
-      this.isShowHeader = true,
-      this.isFormField = false,
-      this.isNumberOnly = true,
-      this.isZeroPadding = false,
-      this.isAutoFocus = false,
-      this.newheight = false,
-      this.labelText,
-      this.suffixIcon,
-      this.prefixIcon,
-      this.intialValue,
-      this.controller,
-      this.onFieldSubmitted,
-      this.focusNode});
+  const MyTextFormField({
+    this.hintText,
+    this.validator,
+    this.onSaved,
+    this.helpText,
+    this.onChange,
+    this.onTap,
+    this.isPassword = false,
+    this.isEmail = false,
+    this.isEnabled = true,
+    this.isRequired = false,
+    this.isshowHelp = false,
+    this.isShowHeader = true,
+    this.isFormField = false,
+    this.isNumberOnly = true,
+    this.isZeroPadding = false,
+    this.isAutoFocus = false,
+    this.newheight = false,
+    this.labelText,
+    this.suffixIcon,
+    this.prefixIcon,
+    this.intialValue,
+    this.controller,
+    this.onFieldSubmitted,
+    this.focusNode,
+    this.textStyle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -110,10 +111,10 @@ class MyTextFormField extends StatelessWidget {
                 controller: controller,
                 initialValue: intialValue,
                 autofocus: isAutoFocus,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1!
-                    .copyWith(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: getProportionateScreenHeight(22),
+                    fontWeight: FontWeight.w700),
                 // scrollPadding: EdgeInsets.all(0),
                 inputFormatters: isNumberOnly
                     ? <TextInputFormatter>[

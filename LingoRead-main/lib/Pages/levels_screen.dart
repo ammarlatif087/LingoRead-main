@@ -96,65 +96,63 @@ class _LevelsScreenState extends State<LevelsScreen> {
               ),
             ),
             SizedBox(height: AppConst.padding * 2),
-            Expanded(
-              child: loadingLevels
-                  ? Obx((() => Wrap(
-                      direction: Axis.horizontal,
-                      alignment: WrapAlignment.center,
-                      spacing: getProportionateScreenWidth(8),
-                      // runAlignment: WrapAlignment.center,
-                      runSpacing: getProportionateScreenHeight(20),
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      // textDirection: TextDirection.rtl,
-                      verticalDirection: VerticalDirection.down,
-                      children: List.generate(5, (index) {
-                        return InkWell(
-                          onTap: () async {
-                            setState(() {
-                              selectedLevel = levelsControllers
-                                  .listLevels[index]["title"]
-                                  .toString();
-                              print(selectedLevel);
-                            });
-                            print(levelsControllers.selectedLevel);
-                            levelsControllers.setSelectedLevel(levelsControllers
-                                .listLevels[index]["title"]
-                                .toString());
-                            final prefs = await SharedPreferences.getInstance();
+            loadingLevels
+                ? Obx((() => Wrap(
+                    direction: Axis.horizontal,
+                    alignment: WrapAlignment.center,
+                    spacing: getProportionateScreenWidth(8),
+                    // runAlignment: WrapAlignment.center,
+                    runSpacing: getProportionateScreenHeight(20),
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    // textDirection: TextDirection.rtl,
+                    verticalDirection: VerticalDirection.down,
+                    children: List.generate(5, (index) {
+                      return InkWell(
+                        onTap: () async {
+                          setState(() {
+                            selectedLevel = levelsControllers.listLevels[index]
+                                    ["title"]
+                                .toString();
+                            print(selectedLevel);
+                          });
+                          print(levelsControllers.selectedLevel);
+                          levelsControllers.setSelectedLevel(levelsControllers
+                              .listLevels[index]["title"]
+                              .toString());
+                          final prefs = await SharedPreferences.getInstance();
 
-                            await prefs.setString("level", selectedLevel);
-                            Get.toNamed(Routes.bottomNavBar);
-                            // loadStories(selectedLevel);
-                          },
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                imagePath[index],
-                                height: getProportionateScreenHeight(150),
-                                width: getProportionateScreenWidth(177),
-                              ),
-                              TextWidgetHeading(
-                                titleHeading:
-                                    "${levelsControllers.listLevels[index]["title"] + ":" + "${levelsControllers.listLevels[index]["description"]}"}",
-                                textStyle: GoogleFonts.inter(
-                                  textStyle: TextStyle(
-                                    fontSize: getProportionateScreenHeight(14),
-                                    //letterSpacing: 1,
-                                    fontWeight: FontWeight.w600,
-                                    color: kTextColorSecondary,
-                                  ),
+                          await prefs.setString("level", selectedLevel);
+                          Get.toNamed(Routes.bottomNavBar);
+                          // loadStories(selectedLevel);
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              imagePath[index],
+                              height: getProportionateScreenHeight(150),
+                              width: getProportionateScreenWidth(177),
+                            ),
+                            TextWidgetHeading(
+                              titleHeading:
+                                  "${levelsControllers.listLevels[index]["title"] + ":" + "${levelsControllers.listLevels[index]["description"]}"}",
+                              textStyle: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                  fontSize: getProportionateScreenHeight(14),
+                                  //letterSpacing: 1,
+                                  fontWeight: FontWeight.w600,
+                                  color: kTextColorSecondary,
                                 ),
                               ),
-                            ],
-                          ),
-                        );
-                      }))))
-                  : Column(
-                      children: const [
-                        CircularProgressIndicator(),
-                      ],
-                    ),
-            ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }))))
+                : Column(
+                    children: const [
+                      Center(child: CircularProgressIndicator()),
+                    ],
+                  ),
             /////////////////////////////////////////////////////////////////////////////////////////////////////
             // Expanded(
             //   child: loadingLevels
@@ -293,50 +291,39 @@ class _LevelsScreenState extends State<LevelsScreen> {
             //           ],
             //         ),
             // ),
-            Padding(
-              padding: EdgeInsets.only(
-                  bottom: getProportionateScreenHeight(34),
-                  right: getProportionateScreenWidth(36)),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  //        print(levelsControllers.selectedLevel);
-                  //                   levelsControllers.setSelectedLevel(
-                  //                       levelsControllers.listLevels[index]
-                  //                               ["title"]
-                  //                           .toString());
-                  //                   final prefs =
-                  //                       await SharedPreferences.getInstance();
+            // Padding(
+            //   padding: EdgeInsets.only(
+            //       bottom: getProportionateScreenHeight(34),
+            //       right: getProportionateScreenWidth(36)),
+            //   child: InkWell(
+            //     splashColor: Colors.transparent,
+            //     highlightColor: Colors.transparent,
+            //     onTap: () async {
+            //       //        print(levelsControllers.selectedLevel);
+            //       //                   levelsControllers.setSelectedLevel(
+            //       //                       levelsControllers.listLevels[index]
+            //       //                               ["title"]
+            //       //                           .toString());
+            //       //                   final prefs =
+            //       //                       await SharedPreferences.getInstance();
 
-                  //                   await prefs.setString(
-                  //                       "level", selectedLevel);
-                  //                   Get.toNamed(Routes.homeScreen);
-                  //                   // loadStories(selectedLevel);
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextWidgetHeading(
-                      titleHeading: 'Try Story',
-                      textStyle: GoogleFonts.inter(
-                        textStyle: const TextStyle(
-                          fontSize: 16,
-                          // letterSpacing: 1,
-                          fontWeight: FontWeight.w600,
-                          color: kButtonColor,
-                        ),
-                      ),
-                    ),
-                    const Icon(
-                      Icons.arrow_right_alt,
-                      color: kButtonColor,
-                    )
-                  ],
-                ),
-              ),
-            ),
+            //       //                   await prefs.setString(
+            //       //                       "level", selectedLevel);
+            //       //                   Get.toNamed(Routes.homeScreen);
+            //       //                   // loadStories(selectedLevel);
+            //     },
+            //     child: Row(
+            //       mainAxisSize: MainAxisSize.min,
+            //       mainAxisAlignment: MainAxisAlignment.end,
+            //       children: const [
+            //         Icon(
+            //           Icons.arrow_right_alt,
+            //           color: kButtonColor,
+            //         )
+            //       ],
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

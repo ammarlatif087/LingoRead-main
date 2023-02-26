@@ -7,17 +7,20 @@ import 'package:lingoread/Controllers/Theme/learnedStories.dart';
 import 'package:lingoread/Controllers/Theme/themecontroller.dart';
 import 'package:lingoread/Controllers/Theme/traningKeywords.dart';
 import 'package:lingoread/Services/postRequests.dart';
+import 'package:lingoread/Utils/size_config.dart';
 import 'package:lingoread/Widgets/Drawer/custome_drawer.dart';
-import 'package:lingoread/Widgets/Header/CustomerHeader.dart';
 import 'package:lingoread/Widgets/Home/story.dart';
 import 'package:lingoread/Widgets/Main/custom_container.dart';
 import 'package:lingoread/Widgets/Shimmers/shimmer_stories.dart';
+import 'package:lingoread/Widgets/custom_app_bar.dart';
+import 'package:lingoread/Widgets/text_widget_heading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Controllers/Theme/favcontroller.dart';
 import '../Controllers/Theme/homecontroller.dart';
 import '../Controllers/Theme/levels_controllers.dart';
 import '../Utils/app_constants.dart';
+import '../Utils/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -111,25 +114,28 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(
       key: _scaffoldkey,
       drawer: CustomDrawer(context),
-      backgroundColor: Colors.redAccent,
+      //  backgroundColor: Colors.redAccent,
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Column(
             children: [
-              //SizedBox(height: AppConst.padding * 3),
-              Obx(
-                () => CustomerHeader(
-                  image: ThemeController.to.isDark.isTrue
-                      ? "assets/images/icon_menu_white.png"
-                      : "assets/images/icon_menu.png",
-                  title: "Stories",
-                  onPressed: () {
-                    HomeController.to.setFilter(false);
-                    _scaffoldkey.currentState!.openDrawer();
-                  },
-                ),
+              CustomAppBar(
+                appBarTitle: 'Discover',
               ),
+              //  SizedBox(height: AppConst.padding * 3),
+              // Obx(
+              //   () => CustomerHeader(
+              //     image: ThemeController.to.isDark.isTrue
+              //         ? "assets/images/icon_menu_white.png"
+              //         : "assets/images/icon_menu.png",
+              //     title: "Stories",
+              //     onPressed: () {
+              //       HomeController.to.setFilter(false);
+              //       _scaffoldkey.currentState!.openDrawer();
+              //     },
+              //   ),
+              // ),
               SizedBox(height: AppConst.padding * 0.7),
               Expanded(
                 child: CustomScrollView(
@@ -150,87 +156,168 @@ class _HomeScreenState extends State<HomeScreen> {
                             )),
                     SliverPadding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: AppConst.padding,
+                        horizontal: getProportionateScreenWidth(12),
                       ),
                       sliver: SliverToBoxAdapter(
-                        child: Card(
-                          child: Row(
-                            //  alignment: WrapAlignment.center,
-                            children: LevelsControllers.to.listLevels.value
-                                .map((e) => Container(
-                                      color: Colors.green,
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: AppConst.padding * 0.5,
-                                          vertical: AppConst.padding * 0.4),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          if (selectedLevel !=
-                                              (e["title"] ?? "")) {
-                                            final prefs =
-                                                await SharedPreferences
-                                                    .getInstance();
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              top: getProportionateScreenHeight(9)),
+                          child: Container(
+                            width: getProportionateScreenWidth(384),
+                            height: getProportionateScreenHeight(84),
+                            margin: EdgeInsets.zero,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color:
+                                      const Color(0xFF5A6CEA).withOpacity(0.1),
+                                  // offset: const Offset(
+                                  //   5.0,
+                                  //   5.0,
+                                  // ),
+                                  blurRadius: 5.0,
+                                  spreadRadius: 1.0,
+                                ), //BoxShadow
+                                const BoxShadow(
+                                  color: Colors.white,
+                                  offset: Offset(0.0, 0.0),
+                                  blurRadius: 0.0,
+                                  spreadRadius: 0.0,
+                                ), //BoxShadow
+                              ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 3, left: 11),
+                                  child: TextWidgetHeading(
+                                    textAlignment: TextAlign.center,
+                                    titleHeading: 'Explore By Level',
+                                    textStyle: GoogleFonts.inter(
+                                      textStyle: TextStyle(
+                                        fontSize:
+                                            getProportionateScreenHeight(18),
+                                        // letterSpacing: 1,
+                                        fontWeight: FontWeight.w600,
+                                        color: kTextColorSecondary,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: getProportionateScreenHeight(8),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  //  alignment: WrapAlignment.center,
+                                  children: LevelsControllers
+                                      .to.listLevels.value
+                                      .map((e) => InkWell(
+                                            onTap: () async {
+                                              if (selectedLevel !=
+                                                  (e["title"] ?? "")) {
+                                                final prefs =
+                                                    await SharedPreferences
+                                                        .getInstance();
 
-                                            await prefs.setString(
-                                                "level", e["title"] ?? "");
-                                            setState(() {
-                                              selectedLevel = e["title"] ?? "";
-                                            });
-                                            HomeController.to.setFilter(false);
+                                                await prefs.setString(
+                                                    "level", e["title"] ?? "");
+                                                setState(() {
+                                                  selectedLevel =
+                                                      e["title"] ?? "";
+                                                });
+                                                HomeController.to
+                                                    .setFilter(false);
 
-                                            loadStories(e["title"] ?? "");
-                                          }
-                                        },
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              padding: const EdgeInsets
-                                                      .symmetric(
-                                                  // horizontal:
-                                                  //     getProportionateScreenHeight(
-                                                  //   26,
-                                                  // ),
+                                                loadStories(e["title"] ?? "");
+                                              }
+                                            },
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal:
+                                                      getProportionateScreenWidth(
+                                                          5)),
+                                              child: Container(
+                                                width:
+                                                    getProportionateScreenWidth(
+                                                        47),
+                                                height:
+                                                    getProportionateScreenHeight(
+                                                        27),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: const Color(
+                                                              0xFF5A6CEA)
+                                                          .withOpacity(0.1),
+                                                      // offset: const Offset(
+                                                      //   5.0,
+                                                      //   5.0,
+                                                      // ),
+                                                      blurRadius: 10.0,
+                                                      spreadRadius: 2.0,
+                                                    ), //BoxShadow
+                                                    const BoxShadow(
+                                                      color: Colors.white,
+                                                      offset: Offset(0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ), //BoxShadow
+                                                  ],
+                                                  color: (selectedLevel ==
+                                                          (e["title"] ?? ""))
+                                                      ? Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary
+                                                      : ThemeController
+                                                              .to.isDark.isTrue
+                                                          ? AppConst
+                                                              .dark_colorPrimaryDark
+                                                          : kPrimaryColor,
+                                                ),
+                                                child: Center(
+                                                  child: TextWidgetHeading(
+                                                    textAlignment:
+                                                        TextAlign.center,
+                                                    titleHeading:
+                                                        e["title"] ?? "",
+                                                    textStyle:
+                                                        GoogleFonts.inter(
+                                                      textStyle: TextStyle(
+                                                        fontSize:
+                                                            getProportionateScreenHeight(
+                                                                12),
+                                                        // letterSpacing: 1,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color: (selectedLevel ==
+                                                                (e["title"] ??
+                                                                    ""))
+                                                            ? kPrimaryColor
+                                                            : ThemeController
+                                                                    .to
+                                                                    .isDark
+                                                                    .isTrue
+                                                                ? AppConst
+                                                                    .dark_colorPrimaryDark
+                                                                : kButtonColor,
+                                                      ),
+                                                    ),
                                                   ),
-                                              decoration: BoxDecoration(
-                                                color: (selectedLevel ==
-                                                        (e["title"] ?? ""))
-                                                    ? Theme.of(context)
-                                                        .colorScheme
-                                                        .secondary
-                                                    : ThemeController
-                                                            .to.isDark.isTrue
-                                                        ? AppConst
-                                                            .dark_colorPrimaryDark
-                                                        : const Color(
-                                                            0xff07595F),
-                                                shape: BoxShape.rectangle,
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        //  vertical: 6,
-                                                        //horizontal: 20,
-                                                        ),
-                                                child: Text(
-                                                  e["title"] ?? "",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline5!
-                                                      .copyWith(
-                                                          fontFamily:
-                                                              GoogleFonts
-                                                                      .poppins()
-                                                                  .fontFamily,
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold),
                                                 ),
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                    ))
-                                .toList(),
+                                          ))
+                                      .toList(),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -263,15 +350,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                   )
                                 : SliverToBoxAdapter(
                                     child: Center(
-                                      child: Text(
-                                        "No stories found",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline5!
-                                            .copyWith(
-                                                fontFamily:
-                                                    GoogleFonts.poppins()
-                                                        .fontFamily),
+                                      child: TextWidgetHeading(
+                                        textAlignment: TextAlign.center,
+                                        titleHeading: 'No stories found',
+                                        textStyle: GoogleFonts.inter(
+                                          textStyle: TextStyle(
+                                            fontSize:
+                                                getProportionateScreenHeight(
+                                                    16),
+                                            // letterSpacing: 1,
+                                            fontWeight: FontWeight.w300,
+                                            color: kTextColorSecondary,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),

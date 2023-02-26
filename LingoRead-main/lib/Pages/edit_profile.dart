@@ -26,7 +26,8 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   loadProfile() {
-    APIsCallPost.submitRequestWithAuth("", {"action": "userprofile"}).then((value) {
+    APIsCallPost.submitRequestWithAuth("", {"action": "userprofile"})
+        .then((value) {
       if (value.statusCode == 200) {
         print(value.data);
 
@@ -51,7 +52,8 @@ class _EditProfileState extends State<EditProfile> {
         "user_phonenumber": textEditingControllerMobileNo.text,
       }).then((value) {
         if (value.statusCode == 200) {
-          ProfileController.to.updateName((textEditingControllerName.text).toString());
+          ProfileController.to
+              .updateName((textEditingControllerName.text).toString());
 
           AppFunctions.showSnackBar("Success", "Profile Updated");
         } else {
@@ -87,178 +89,192 @@ class _EditProfileState extends State<EditProfile> {
           resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
-              ThemeFooter(),
               Padding(
-                padding: EdgeInsets.fromLTRB(AppConst.padding * 1, AppConst.padding * 2, AppConst.padding * 1, 0),
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: Color(0xffffffff),
-                    ),
-                    onPressed: () {
-                      Get.back();
-                    },
-                  ),
-                  SizedBox(height: AppConst.padding * 3),
-                  Expanded(
-                      child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Center(
-                          child: Text('Edit Profile',
-                              style: Theme.of(context).textTheme.headline2!.copyWith(fontSize: 24)),
+                padding: EdgeInsets.fromLTRB(AppConst.padding * 1,
+                    AppConst.padding * 2, AppConst.padding * 1, 0),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: Color(0xffffffff),
                         ),
-                        SizedBox(height: AppConst.padding * 1.5),
-                        CircleAvatar(
-                          backgroundColor: Theme.of(context).primaryColorDark.withOpacity(0.2),
-                          radius: AppConst.padding * 1.5,
-                          child: Icon(
-                            Icons.person,
-                            size: AppConst.padding * 2.6,
-                            color: AppConst.colorWhite,
-                          ),
-                        ),
-                        SizedBox(height: AppConst.padding * 1.2),
-                        InkWell(
-                          onTap: () {
-                            if (!editName) {
-                              setState(() {
-                                editName = true;
-                              });
-                              focusNodeName.requestFocus();
-                            }
-                          },
-                          child: MyTextFormField(
-                            focusNode: focusNodeName,
-                            controller: textEditingControllerName,
-                            hintText: "Name",
-                            labelText: "Name",
-                            suffixIcon: IconButton(
-                                icon: editName
-                                    ? Icon(
-                                        Icons.check,
-                                        color: Colors.white,
-                                      )
-                                    : Icon(
-                                        Icons.edit,
-                                        color: Colors.white,
-                                      ),
-                                onPressed: () {
+                        onPressed: () {
+                          Get.back();
+                        },
+                      ),
+                      SizedBox(height: AppConst.padding * 3),
+                      Expanded(
+                          child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Center(
+                              child: Text('Edit Profile',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline2!
+                                      .copyWith(fontSize: 24)),
+                            ),
+                            SizedBox(height: AppConst.padding * 1.5),
+                            CircleAvatar(
+                              backgroundColor: Theme.of(context)
+                                  .primaryColorDark
+                                  .withOpacity(0.2),
+                              radius: AppConst.padding * 1.5,
+                              child: Icon(
+                                Icons.person,
+                                size: AppConst.padding * 2.6,
+                                color: AppConst.colorWhite,
+                              ),
+                            ),
+                            SizedBox(height: AppConst.padding * 1.2),
+                            InkWell(
+                              onTap: () {
+                                if (!editName) {
                                   setState(() {
-                                    editName = false;
+                                    editName = true;
                                   });
-                                  updateProfile();
-                                }),
-                            isEnabled: editName,
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Please enter your name";
-                              }
-                              return null;
-                            },
-                            isShowHeader: false,
-                            isNumberOnly: false,
-                          ),
-                        ),
-                        SizedBox(height: AppConst.padding * 0.5),
-                        InkWell(
-                          onTap: () {
-                            if (!editPhoneNo) {
-                              setState(() {
-                                editPhoneNo = true;
-                              });
-
-                              focusNodePhone.requestFocus();
-                            }
-                          },
-                          child: MyTextFormField(
-                            focusNode: focusNodePhone,
-                            controller: textEditingControllerMobileNo,
-                            hintText: "+92123456789",
-                            labelText: "Mobile Number",
-                            suffixIcon: IconButton(
-                                icon: editPhoneNo
-                                    ? Icon(
-                                        Icons.check,
-                                        color: Colors.white,
-                                      )
-                                    : Icon(
-                                        Icons.edit,
-                                        color: Colors.white,
-                                      ),
-                                onPressed: () {
-                                  if (textEditingControllerMobileNo.text.trim().isEmpty) {
-                                    AppFunctions.showSnackBar("Error", "Please Enter Phone Number");
-                                  } else if (!RegExp(r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)')
-                                      .hasMatch(textEditingControllerMobileNo.text.trim())) {
-                                    AppFunctions.showSnackBar("Error", "Please enter a valid mobile number");
-                                  } else {
-                                    setState(() {
-                                      editPhoneNo = false;
-                                    });
-                                    updateProfile();
+                                  focusNodeName.requestFocus();
+                                }
+                              },
+                              child: MyTextFormField(
+                                focusNode: focusNodeName,
+                                controller: textEditingControllerName,
+                                hintText: "Name",
+                                labelText: "Name",
+                                suffixIcon: IconButton(
+                                    icon: editName
+                                        ? Icon(
+                                            Icons.check,
+                                            color: Colors.white,
+                                          )
+                                        : Icon(
+                                            Icons.edit,
+                                            color: Colors.white,
+                                          ),
+                                    onPressed: () {
+                                      setState(() {
+                                        editName = false;
+                                      });
+                                      updateProfile();
+                                    }),
+                                isEnabled: editName,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "Please enter your name";
                                   }
-                                }),
-                            isEnabled: editPhoneNo,
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Please enter your mobile number";
-                              }
-
-                              return null;
-                            },
-                            isShowHeader: false,
-                            isNumberOnly: true,
-                          ),
-                        ),
-                        SizedBox(height: AppConst.padding * 0.5),
-                        InkWell(
-                          onTap: () {
-                            if (!editAddress) {
-                              setState(() {
-                                editAddress = true;
-                              });
-
-                              focusNodeedit.requestFocus();
-                            }
-                          },
-                          child: MyTextFormField(
-                            focusNode: focusNodeedit,
-                            controller: textEditingControllerAddress,
-                            hintText: "Address",
-                            labelText: "Address",
-                            suffixIcon: IconButton(
-                                icon: editAddress
-                                    ? Icon(
-                                        Icons.check,
-                                        color: Colors.white,
-                                      )
-                                    : Icon(
-                                        Icons.edit,
-                                        color: Colors.white,
-                                      ),
-                                onPressed: () {
+                                  return null;
+                                },
+                                isShowHeader: false,
+                                isNumberOnly: false,
+                              ),
+                            ),
+                            SizedBox(height: AppConst.padding * 0.5),
+                            InkWell(
+                              onTap: () {
+                                if (!editPhoneNo) {
                                   setState(() {
-                                    editAddress = false;
+                                    editPhoneNo = true;
                                   });
-                                  updateProfile();
-                                }),
-                            isEnabled: editAddress,
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return 'Please enter your address';
-                              }
-                              return null;
-                            },
-                            isShowHeader: false,
-                            isNumberOnly: false,
-                          ),
+
+                                  focusNodePhone.requestFocus();
+                                }
+                              },
+                              child: MyTextFormField(
+                                focusNode: focusNodePhone,
+                                controller: textEditingControllerMobileNo,
+                                hintText: "+92123456789",
+                                labelText: "Mobile Number",
+                                suffixIcon: IconButton(
+                                    icon: editPhoneNo
+                                        ? Icon(
+                                            Icons.check,
+                                            color: Colors.white,
+                                          )
+                                        : Icon(
+                                            Icons.edit,
+                                            color: Colors.white,
+                                          ),
+                                    onPressed: () {
+                                      if (textEditingControllerMobileNo.text
+                                          .trim()
+                                          .isEmpty) {
+                                        AppFunctions.showSnackBar("Error",
+                                            "Please Enter Phone Number");
+                                      } else if (!RegExp(
+                                              r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)')
+                                          .hasMatch(
+                                              textEditingControllerMobileNo.text
+                                                  .trim())) {
+                                        AppFunctions.showSnackBar("Error",
+                                            "Please enter a valid mobile number");
+                                      } else {
+                                        setState(() {
+                                          editPhoneNo = false;
+                                        });
+                                        updateProfile();
+                                      }
+                                    }),
+                                isEnabled: editPhoneNo,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "Please enter your mobile number";
+                                  }
+
+                                  return null;
+                                },
+                                isShowHeader: false,
+                                isNumberOnly: true,
+                              ),
+                            ),
+                            SizedBox(height: AppConst.padding * 0.5),
+                            InkWell(
+                              onTap: () {
+                                if (!editAddress) {
+                                  setState(() {
+                                    editAddress = true;
+                                  });
+
+                                  focusNodeedit.requestFocus();
+                                }
+                              },
+                              child: MyTextFormField(
+                                focusNode: focusNodeedit,
+                                controller: textEditingControllerAddress,
+                                hintText: "Address",
+                                labelText: "Address",
+                                suffixIcon: IconButton(
+                                    icon: editAddress
+                                        ? Icon(
+                                            Icons.check,
+                                            color: Colors.white,
+                                          )
+                                        : Icon(
+                                            Icons.edit,
+                                            color: Colors.white,
+                                          ),
+                                    onPressed: () {
+                                      setState(() {
+                                        editAddress = false;
+                                      });
+                                      updateProfile();
+                                    }),
+                                isEnabled: editAddress,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return 'Please enter your address';
+                                  }
+                                  return null;
+                                },
+                                isShowHeader: false,
+                                isNumberOnly: false,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  )),
-                ]),
+                      )),
+                    ]),
               )
             ],
           )),

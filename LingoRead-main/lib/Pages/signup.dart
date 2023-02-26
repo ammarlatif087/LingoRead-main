@@ -1,17 +1,10 @@
-import 'dart:convert';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lingoread/Pages/introduction.dart';
 import 'package:lingoread/Services/postRequests.dart';
-import 'package:lingoread/Utils/Theme/decoration.dart';
 import 'package:lingoread/Utils/app_funtions.dart';
 import 'package:lingoread/Utils/size_config.dart';
-import 'package:lingoread/Widgets/Buttons/buttongoogle.dart';
 import 'package:lingoread/Widgets/Main/custom_container.dart';
-import 'package:lingoread/Widgets/Main/footer.dart';
 import 'package:lingoread/Widgets/text_widget_heading.dart';
 
 import '../Routes/routes_names.dart';
@@ -45,10 +38,10 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return ThemeContainer(
         child: Scaffold(
+      //backgroundColor: Colors.red,
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          ThemeFooter(),
           Padding(
             padding: EdgeInsets.fromLTRB(AppConst.padding * 2,
                 AppConst.padding * 3, AppConst.padding * 2, 0),
@@ -168,8 +161,8 @@ class _SignUpState extends State<SignUp> {
                               SizedBox(height: AppConst.padding * 0.5),
                               isSendingMessage
                                   ? Container(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 12),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 12),
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(
                                               AppConst.padding * 0.25),
@@ -199,7 +192,7 @@ class _SignUpState extends State<SignUp> {
                                         },
                                       ),
                                     ),
-                              SizedBox(height: 320),
+                              const SizedBox(height: 320),
                             ],
                           ),
                         ),

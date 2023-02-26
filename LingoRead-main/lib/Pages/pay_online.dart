@@ -18,14 +18,13 @@ class PayOnline extends StatelessWidget {
       child: Scaffold(
           body: Stack(
         children: [
-          ThemeFooter(),
           Padding(
             padding: const EdgeInsets.fromLTRB(35, 25, 35, 15),
             child: Column(
               children: [
                 SizedBox(height: AppConst.padding * 3),
                 CustomerHeader(
-                  image:  ThemeController.to.isDark.isTrue
+                  image: ThemeController.to.isDark.isTrue
                       ? "assets/images/icon_menu_white.png"
                       : "assets/images/pay_online.png",
                   title: "Pay Online",
@@ -33,7 +32,7 @@ class PayOnline extends StatelessWidget {
                     Get.back();
                   },
                 ),
-                SizedBox(height: AppConst.padding * 3), 
+                SizedBox(height: AppConst.padding * 3),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
@@ -44,9 +43,9 @@ class PayOnline extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headline2!
-                              .copyWith(color: Color(0xff016064)),
+                              .copyWith(color: const Color(0xff016064)),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         MyTextFormField(
@@ -57,7 +56,7 @@ class PayOnline extends StatelessWidget {
                         MyTextFormField(
                           controller: textEditingController,
                           labelText: "Card Number",
-                          prefixIcon: Icon(
+                          prefixIcon: const Icon(
                             Icons.car_repair,
                             color: Colors.white,
                           ),
@@ -93,7 +92,7 @@ class PayOnline extends StatelessWidget {
                               width: 200,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
-                                  color: Color(0xff00ACC4)),
+                                  color: const Color(0xff00ACC4)),
                               child: InkWell(
                                 onTap: () {},
                                 child: Center(

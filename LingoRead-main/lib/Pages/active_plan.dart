@@ -15,7 +15,6 @@ class ActivePlan extends StatelessWidget {
     return ThemeContainer(
       child: Scaffold(
         body: Stack(children: [
-          ThemeFooter(),
           Column(
             children: [
               Padding(
@@ -48,7 +47,7 @@ class ActivePlan extends StatelessWidget {
                               style: Theme.of(context)
                                   .textTheme
                                   .headline2!
-                                  .copyWith(color: Color(0xff016064))),
+                                  .copyWith(color: const Color(0xff016064))),
                           const SizedBox(
                             height: 6,
                           ),
@@ -88,9 +87,9 @@ class ActivePlan extends StatelessWidget {
                                   .textTheme
                                   .headline5!
                                   .copyWith(
-                                      color: Color(0xff00ACC4),
+                                      color: const Color(0xff00ACC4),
                                       fontWeight: FontWeight.bold)),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text('Start Date',
@@ -108,13 +107,13 @@ class ActivePlan extends StatelessWidget {
                                 .textTheme
                                 .headline5!
                                 .copyWith(
-                                    color: Color(0xff00ACC4),
+                                    color: const Color(0xff00ACC4),
                                     fontSize: 10,
                                     fontWeight: FontWeight.bold,
                                     fontFamily:
                                         GoogleFonts.poppins().fontFamily),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text('End Date',
@@ -132,7 +131,7 @@ class ActivePlan extends StatelessWidget {
                                 .textTheme
                                 .headline5!
                                 .copyWith(
-                                    color: Color(0xff00ACC4),
+                                    color: const Color(0xff00ACC4),
                                     fontSize: 10,
                                     fontWeight: FontWeight.bold,
                                     fontFamily:

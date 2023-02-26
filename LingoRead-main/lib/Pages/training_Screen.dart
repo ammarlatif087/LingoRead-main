@@ -5,11 +5,10 @@ import 'package:lingoread/Controllers/Theme/traningKeywords.dart';
 import 'package:lingoread/Routes/routes_names.dart';
 import 'package:lingoread/Utils/app_funtions.dart';
 import 'package:lingoread/Utils/constants.dart';
+import 'package:lingoread/Widgets/custom_app_bar.dart';
 import 'package:lingoread/Widgets/text_widget_heading.dart';
 import 'package:lingoread/Widgets/training_screen_widget.dart';
 import 'package:lingoread/Utils/app_constants.dart';
-import 'package:lingoread/Widgets/Header/CustomerHeader.dart';
-import 'package:lingoread/Widgets/Main/footer.dart';
 
 import '../Controllers/Theme/themecontroller.dart';
 import '../Utils/size_config.dart';
@@ -43,20 +42,23 @@ class _TrainingState extends State<Training> {
       drawer: CustomDrawer(context),
       body: Column(
         children: [
-          SizedBox(height: AppConst.padding * 3),
-          CustomerHeader(
-            title: "Training",
-            image: ThemeController.to.isDark.isTrue
-                ? "assets/images/icon_menu_white.png"
-                : 'assets/images/icon_menu.png',
-            titleimage: ThemeController.to.isDark.isTrue
-                ? 'assets/images/training_icon_dark.png'
-                : 'assets/images/icon_training.png',
-            onPressed: () {
-              _scaffoldkey.currentState!.openDrawer();
+          // SizedBox(height: AppConst.padding * 3),
+          // CustomerHeader(
+          //   title: "Training",
+          //   image: ThemeController.to.isDark.isTrue
+          //       ? "assets/images/icon_menu_white.png"
+          //       : 'assets/images/icon_menu.png',
+          //   titleimage: ThemeController.to.isDark.isTrue
+          //       ? 'assets/images/training_icon_dark.png'
+          //       : 'assets/images/icon_training.png',
+          //   onPressed: () {
+          //     _scaffoldkey.currentState!.openDrawer();
 
-              // Get.back();
-            },
+          //     // Get.back();
+          //   },
+          // ),
+          CustomAppBar(
+            appBarTitle: "Train",
           ),
           SizedBox(height: getProportionateScreenHeight(20)),
           Padding(
@@ -215,16 +217,13 @@ class _TrainingState extends State<Training> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: getProportionateScreenHeight(25),
                 ),
 
-                const SizedBox(
-                  height: 25,
-                ),
                 Container(
-                    height: 40,
-                    width: 300,
+                    height: getProportionateScreenHeight(40),
+                    width: getProportionateScreenWidth(300),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: ThemeController.to.isDark.isTrue

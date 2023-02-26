@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lingoread/Utils/size_config.dart';
-import 'package:lingoread/Widgets/Header/CustomerHeader.dart';
 import 'package:lingoread/Widgets/Main/custom_container.dart';
+import 'package:lingoread/Widgets/custom_app_bar.dart';
 import 'package:lingoread/Widgets/text_widget_heading.dart';
 
 import '../Controllers/Theme/themecontroller.dart';
@@ -31,18 +31,19 @@ class _ShopState extends State<Shop> {
       //  drawer: CustomDrawer(context),
       child: Column(
         children: [
+          CustomAppBar(appBarTitle: 'Shop'),
           //  SizedBox(height: getProportionateScreenHeight(30)),
-          CustomerHeader(
-            image: ThemeController.to.isDark.isTrue
-                ? "assets/images/icon_menu_white.png"
-                : "assets/images/icon_menu.png",
-            titleicon: Icons.shopping_cart,
-            title: "Shop",
-            onPressed: () {
-              _scaffoldkey.currentState!.openDrawer();
-            },
-          ),
-          SizedBox(height: getProportionateScreenHeight(8)),
+          // CustomerHeader(
+          //   image: ThemeController.to.isDark.isTrue
+          //       ? "assets/images/icon_menu_white.png"
+          //       : "assets/images/icon_menu.png",
+          //   titleicon: Icons.shopping_cart,
+          //   title: "Shop",
+          //   onPressed: () {
+          //     _scaffoldkey.currentState!.openDrawer();
+          //   },
+          // ),
+          // SizedBox(height: getProportionateScreenHeight(8)),
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(10)),

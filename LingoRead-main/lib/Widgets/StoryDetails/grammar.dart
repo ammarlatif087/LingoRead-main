@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,12 +5,11 @@ import 'package:lingoread/Controllers/Theme/themecontroller.dart';
 import 'package:lingoread/Utils/constants.dart';
 import 'package:lingoread/Utils/size_config.dart';
 import 'package:lingoread/Widgets/text_widget_heading.dart';
-
 import '../../Utils/app_constants.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 class Grammer extends StatelessWidget {
-  Grammer(this.grammers, {Key? key}) : super(key: key);
+  const Grammer(this.grammers, {Key? key}) : super(key: key);
   final List grammers;
 
   @override
@@ -28,7 +25,7 @@ class Grammer extends StatelessWidget {
 }
 
 class GrammerWidget extends StatelessWidget {
-  GrammerWidget(this.data, {Key? key}) : super(key: key);
+  const GrammerWidget(this.data, {Key? key}) : super(key: key);
   final data;
 
   @override
@@ -123,7 +120,7 @@ class GrammerWidget extends StatelessWidget {
               ),
               Container(
                 height: getProportionateScreenHeight(2),
-                color: Color(0XFFD9D9D9),
+                color: const Color(0XFFD9D9D9),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(

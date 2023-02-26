@@ -143,8 +143,10 @@ class _StoriesPageState extends State<StoriesPage> {
                           padding: EdgeInsets.only(
                               left: getProportionateScreenWidth(24)),
                           child: Container(
+                            height: getProportionateScreenHeight(45),
+                            width: getProportionateScreenWidth(45),
                             decoration: BoxDecoration(
-                              color: kButtonColor.withOpacity(.6),
+                              color: kButtonColor.withOpacity(.3),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: IconButton(
@@ -153,6 +155,7 @@ class _StoriesPageState extends State<StoriesPage> {
                                 color: ThemeController.to.isDark.isTrue
                                     ? AppConst.colorWhite
                                     : kButtonColor,
+                                size: 20,
                               ),
                               onPressed: () {
                                 Get.back();
@@ -272,8 +275,6 @@ class _StoriesPageState extends State<StoriesPage> {
                                     ),
                                   ),
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
                                       InkWell(
                                         onTap: () {
@@ -629,8 +630,8 @@ class _StoriesPageState extends State<StoriesPage> {
                         children: [
                           Obx(
                             () => Container(
-                              // padding: EdgeInsets.symmetric(
-                              //     horizontal: AppConst.padding),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: AppConst.padding),
                               child: InkWell(
                                 onTap: () {
                                   if (checkBoxValue) {
@@ -649,52 +650,61 @@ class _StoriesPageState extends State<StoriesPage> {
                                     });
                                   }
                                 },
-                                child: Container(
-                                  color: kButtonColor.withOpacity(0.3),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      TextWidgetHeading(
-                                        textAlignment: TextAlign.center,
-                                        titleHeading: 'Mark As Learned',
-                                        textStyle: GoogleFonts.inter(
-                                          textStyle: TextStyle(
-                                            fontSize:
-                                                getProportionateScreenHeight(
-                                                    10),
-                                            // letterSpacing: 1.3,
-                                            fontWeight: FontWeight.w400,
-                                            color: ThemeController
-                                                    .to.isDark.isTrue
-                                                ? AppConst.light_textColor_gw
-                                                : kTextColorPrimary,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    height: getProportionateScreenHeight(32),
+                                    width: getProportionateScreenWidth(132),
+                                    decoration: BoxDecoration(
+                                        color: kButtonColor.withOpacity(0.3),
+                                        borderRadius: BorderRadius.circular(
+                                            getProportionateScreenHeight(16))),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        TextWidgetHeading(
+                                          textAlignment: TextAlign.center,
+                                          titleHeading: 'Mark As Learned',
+                                          textStyle: GoogleFonts.inter(
+                                            textStyle: TextStyle(
+                                              fontSize:
+                                                  getProportionateScreenHeight(
+                                                      10),
+                                              // letterSpacing: 1.3,
+                                              fontWeight: FontWeight.w400,
+                                              color: ThemeController
+                                                      .to.isDark.isTrue
+                                                  ? AppConst.light_textColor_gw
+                                                  : kTextColorPrimary,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: CircleAvatar(
-                                          radius: 11,
-                                          backgroundColor: Theme.of(context)
-                                              .primaryColorLight,
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
                                           child: CircleAvatar(
-                                              radius: 8,
-                                              backgroundColor: Theme.of(context)
-                                                  .primaryColor,
-                                              child: CircleAvatar(
-                                                radius: 6,
-                                                backgroundColor: checkBoxValue
-                                                    ? Theme.of(context)
-                                                        .colorScheme
-                                                        .onPrimary
-                                                    : Theme.of(context)
-                                                        .colorScheme
-                                                        .secondary,
-                                              )),
+                                            radius: 11,
+                                            backgroundColor: Theme.of(context)
+                                                .primaryColorLight,
+                                            child: CircleAvatar(
+                                                radius: 8,
+                                                backgroundColor:
+                                                    Theme.of(context)
+                                                        .primaryColor,
+                                                child: CircleAvatar(
+                                                  radius: 6,
+                                                  backgroundColor: checkBoxValue
+                                                      ? Theme.of(context)
+                                                          .colorScheme
+                                                          .onPrimary
+                                                      : Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary,
+                                                )),
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -749,9 +759,7 @@ class _StoriesPageState extends State<StoriesPage> {
                                 ],
                               ),
                             ),
-                          const SizedBox(
-                            height: 5,
-                          ),
+
                           // Row(
                           //   children: [
                           //     ///------Pause  / Play Button
@@ -1183,6 +1191,8 @@ class _StoriesPageState extends State<StoriesPage> {
                                   : Container(),
                 ),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ///------Pause  / Play Button
                     //---- this will be shown when reading is continue
@@ -1262,152 +1272,159 @@ class _StoriesPageState extends State<StoriesPage> {
                         : const SizedBox.shrink(),
 
                     ///---------Play / Restart Button
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: ThemeController.to.isDark.isTrue
-                              ? AppConst.colorBlack
-                              : const Color(0xff00ACC4),
-                          radius: 20,
-                          child: IconButton(
-                            icon: Icon(
-                                playingAudio ? Icons.stop : Icons.play_arrow,
-                                color: Colors.white),
-                            onPressed: (screenNo != 0)
-                                ? () {
-                                    AppFunctions.showSnackBar(
-                                        "Info", "Open Story Tab to Play Story");
-                                  }
-                                : () async {
-                                    if (isPaidStory) {
-                                      AppFunctions.subcribeplan(context);
-                                    } else {
-                                      if (playingAudio) {
-                                        flutterTts.stop();
-                                        storyDetailsControllers
-                                            .resetDataAfterRead();
-                                        setState(() {
-                                          playingAudio = false;
-                                          selectedWordIndex = 0;
-                                        });
-                                      } else {
-                                        await flutterTts.setLanguage("de");
-                                        await flutterTts.setQueueMode(1);
-                                        await flutterTts
-                                            .awaitSpeakCompletion(true);
-                                        await flutterTts.speak(textGerman);
-                                        flutterTts.setProgressHandler(
-                                            (String text, int startOffset,
-                                                int endOffset, String word) {
-                                          print(
-                                              "$startOffset $endOffset $word");
-                                          storyDetailsControllers
-                                              .setPlayingIndex(word);
-                                        });
 
-                                        setState(() {
-                                          selectedWordIndex = 0;
-                                          playingAudio = true;
-                                          pauseAudio = true;
-                                        });
-                                        flutterTts.setCancelHandler(() {});
-                                        flutterTts.setCompletionHandler(() {
+                    Visibility(
+                      visible: screenNo == 0,
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: ThemeController.to.isDark.isTrue
+                                ? AppConst.colorBlack
+                                : const Color(0xff00ACC4),
+                            radius: 20,
+                            child: IconButton(
+                              icon: Icon(
+                                  playingAudio ? Icons.stop : Icons.play_arrow,
+                                  color: Colors.white),
+                              onPressed: (screenNo != 0)
+                                  ? () {
+                                      AppFunctions.showSnackBar("Info",
+                                          "Open Story Tab to Play Story");
+                                    }
+                                  : () async {
+                                      if (isPaidStory) {
+                                        AppFunctions.subcribeplan(context);
+                                      } else {
+                                        if (playingAudio) {
                                           flutterTts.stop();
                                           storyDetailsControllers
                                               .resetDataAfterRead();
                                           setState(() {
                                             playingAudio = false;
+                                            selectedWordIndex = 0;
                                           });
-                                        });
+                                        } else {
+                                          await flutterTts.setLanguage("de");
+                                          await flutterTts.setQueueMode(1);
+                                          await flutterTts
+                                              .awaitSpeakCompletion(true);
+                                          await flutterTts.speak(textGerman);
+                                          flutterTts.setProgressHandler(
+                                              (String text, int startOffset,
+                                                  int endOffset, String word) {
+                                            print(
+                                                "$startOffset $endOffset $word");
+                                            storyDetailsControllers
+                                                .setPlayingIndex(word);
+                                          });
+
+                                          setState(() {
+                                            selectedWordIndex = 0;
+                                            playingAudio = true;
+                                            pauseAudio = true;
+                                          });
+                                          flutterTts.setCancelHandler(() {});
+                                          flutterTts.setCompletionHandler(() {
+                                            flutterTts.stop();
+                                            storyDetailsControllers
+                                                .resetDataAfterRead();
+                                            setState(() {
+                                              playingAudio = false;
+                                            });
+                                          });
+                                        }
                                       }
-                                    }
-                                  },
+                                    },
+                            ),
                           ),
-                        ),
-                        if (isPaidStory)
-                          const Positioned(
-                            child: PaidStar(),
-                            top: 0,
-                            right: 0,
-                          )
-                      ],
+                          if (isPaidStory)
+                            const Positioned(
+                              child: PaidStar(),
+                              top: 0,
+                              right: 0,
+                            ),
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       width: 10,
                     ),
 
                     //------Speed Button
-                    Container(
-                      decoration: BoxDecoration(
-                          color: ThemeController.to.isDark.isTrue
-                              ? AppConst.colorBlack
-                              : const Color(0xff58B9B3),
-                          borderRadius: BorderRadius.circular(25)),
-                      child: IconButton(
-                        icon: Text(
-                          speed + "x".toUpperCase(),
-                          style: TextStyle(
-                              color: ThemeController.to.isDark.isTrue
-                                  ? AppConst.colorWhite
-                                  : Theme.of(context).primaryColorLight,
-                              fontSize: 14,
-                              fontFamily: GoogleFonts.dmSans().fontFamily,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        onPressed: () async {
-                          if (speed == "0.5") {
-                            await flutterTts.stop();
-                            await flutterTts.setSpeechRate(0.35);
-                            setState(() {
-                              speed = "0.7";
-                            });
-                            playAudioOnSpeedChange();
-                          } else if (speed == "0.7") {
-                            await flutterTts.stop();
-                            flutterTts.setSpeechRate(0.5);
-                            setState(() {
-                              speed = "1";
-                            });
-                            playAudioOnSpeedChange();
-                          } else if (speed == "1") {
-                            await flutterTts.stop();
-
-                            flutterTts.setSpeechRate(0.7);
-                            setState(() {
-                              speed = "1.5";
-                            });
-                            playAudioOnSpeedChange();
-                          } else if (speed == "1.5") {
-                            await flutterTts.stop();
-
-                            flutterTts.setSpeechRate(1.0);
-                            setState(() {
-                              speed = "2";
-                            });
-                            playAudioOnSpeedChange();
-                          } else if (speed == "2") {
-                            await flutterTts.stop();
-
-                            flutterTts.setSpeechRate(0.25);
-                            setState(() {
-                              speed = "0.5";
-                            });
-                            playAudioOnSpeedChange();
-                          } else {
-                            await flutterTts.stop();
-
-                            setState(() {
+                    Visibility(
+                      visible: screenNo == 0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: ThemeController.to.isDark.isTrue
+                                ? AppConst.colorBlack
+                                : const Color(0xff58B9B3),
+                            borderRadius: BorderRadius.circular(25)),
+                        child: IconButton(
+                          icon: Text(
+                            speed + "x".toUpperCase(),
+                            style: TextStyle(
+                                color: ThemeController.to.isDark.isTrue
+                                    ? AppConst.colorWhite
+                                    : Theme.of(context).primaryColorLight,
+                                fontSize: 14,
+                                fontFamily: GoogleFonts.dmSans().fontFamily,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: () async {
+                            if (speed == "0.5") {
+                              await flutterTts.stop();
+                              await flutterTts.setSpeechRate(0.35);
+                              setState(() {
+                                speed = "0.7";
+                              });
+                              playAudioOnSpeedChange();
+                            } else if (speed == "0.7") {
+                              await flutterTts.stop();
                               flutterTts.setSpeechRate(0.5);
-                              speed = "1";
-                            });
-                            playAudioOnSpeedChange();
-                          }
-                          // flutterTts.setSpeechRate(!is1x ? 0.5 : 1.0);
+                              setState(() {
+                                speed = "1";
+                              });
+                              playAudioOnSpeedChange();
+                            } else if (speed == "1") {
+                              await flutterTts.stop();
 
-                          // setState(() {
-                          //   is1x = !is1x;
-                          // });
-                        },
+                              flutterTts.setSpeechRate(0.7);
+                              setState(() {
+                                speed = "1.5";
+                              });
+                              playAudioOnSpeedChange();
+                            } else if (speed == "1.5") {
+                              await flutterTts.stop();
+
+                              flutterTts.setSpeechRate(1.0);
+                              setState(() {
+                                speed = "2";
+                              });
+                              playAudioOnSpeedChange();
+                            } else if (speed == "2") {
+                              await flutterTts.stop();
+
+                              flutterTts.setSpeechRate(0.25);
+                              setState(() {
+                                speed = "0.5";
+                              });
+                              playAudioOnSpeedChange();
+                            } else {
+                              await flutterTts.stop();
+
+                              setState(() {
+                                flutterTts.setSpeechRate(0.5);
+                                speed = "1";
+                              });
+                              playAudioOnSpeedChange();
+                            }
+                            // flutterTts.setSpeechRate(!is1x ? 0.5 : 1.0);
+
+                            // setState(() {
+                            //   is1x = !is1x;
+                            // });
+                          },
+                        ),
                       ),
                     ),
                   ],

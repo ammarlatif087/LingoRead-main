@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lingoread/Routes/routes_names.dart';
-import 'package:lingoread/Utils/app_constants.dart';
 
 import '../../Controllers/Theme/menuController.dart';
 import '../../Controllers/Theme/themecontroller.dart';
-import '../../Utils/Theme/theme.dart';
 
 class CustomDrawer extends StatelessWidget {
-  CustomDrawer(this.context, {Key? key}) : super(key: key);
+  const CustomDrawer(this.context, {Key? key}) : super(key: key);
   final BuildContext context;
   widgetItems(String name, String asset, Function onTap) {
     return Obx(() => InkWell(
           onTap: onTap as void Function(),
           child: Container(
-            color: (MenuController.to.selected.value == name) ? Colors.white.withOpacity(0.1) : Colors.transparent,
+            color: (MenuController.to.selected.value == name)
+                ? Colors.white.withOpacity(0.1)
+                : Colors.transparent,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
             child: Row(
               children: [
@@ -98,20 +97,23 @@ class CustomDrawer extends StatelessWidget {
                         MenuController.to.setSelected("Home");
                         Get.toNamed(Routes.homeScreen);
                       }),
-                      widgetItems("Training", "assets/images/icon_training.png", () {
+                      widgetItems("Training", "assets/images/icon_training.png",
+                          () {
                         MenuController.to.setSelected("Training");
 
                         Get.toNamed(
                           Routes.training,
                         );
                       }),
-                      widgetItems("Favourites", "assets/images/icon_heart.png", () {
+                      widgetItems("Favourites", "assets/images/icon_heart.png",
+                          () {
                         MenuController.to.setSelected("Favourites");
 
                         // Get.offAll(Routes.favourites);
                         Get.toNamed(Routes.favourites);
                       }),
-                      widgetItems("Profile", "assets/images/icon_profile.png", () {
+                      widgetItems("Profile", "assets/images/icon_profile.png",
+                          () {
                         MenuController.to.setSelected("Profile");
 
                         // Get.offAll(ProfileScreen());
@@ -122,7 +124,8 @@ class CustomDrawer extends StatelessWidget {
 
                         Get.toNamed(Routes.shop);
                       }),
-                      widgetItems("Setting", "assets/images/icon_setting.png", () {
+                      widgetItems("Setting", "assets/images/icon_setting.png",
+                          () {
                         MenuController.to.setSelected("Setting");
 
                         Get.toNamed(Routes.setting);

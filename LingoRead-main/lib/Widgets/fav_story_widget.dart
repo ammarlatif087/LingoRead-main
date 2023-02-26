@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:lingoread/Controllers/Theme/favcontroller.dart';
-import 'package:lingoread/Controllers/Theme/homecontroller.dart';
 import 'package:lingoread/Controllers/Theme/themecontroller.dart';
 import 'package:lingoread/Utils/app_constants.dart';
 import 'package:lingoread/Utils/size_config.dart';
 import 'package:lingoread/Widgets/text_widget_heading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../Routes/routes_names.dart';
 import '../../Utils/constants.dart';
 
 class FavStoryWidget extends StatefulWidget {
@@ -193,9 +190,32 @@ class _StoryState extends State<FavStoryWidget> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Icon(
-                      Icons.favorite,
-                      color: Colors.red,
+                    InkWell(
+                      onTap: () {
+                        if (favController.checkIfAddedtoFav(
+                                (widget.story ?? {})["id"] ?? "0") ==
+                            -1) {
+                          favController.addtoFav(
+                              (widget.story ?? {})["id"] ?? "",
+                              isFavScreen: true);
+                        } else {
+                          favController.removeFromFav(
+                              (widget.story ?? {})["id"] ?? "",
+                              isFavScreen: true);
+                        }
+                      },
+                      child: Icon(
+                        favController.checkIfAddedtoFav(
+                                    (widget.story ?? {})["id"] ?? "0") ==
+                                -1
+                            ? Icons.favorite_border
+                            : Icons.favorite,
+                        color: favController.checkIfAddedtoFav(
+                                    (widget.story ?? {})["id"] ?? "0") ==
+                                -1
+                            ? const Color(0XFFBEC3D0)
+                            : Colors.red,
+                      ),
                     ),
                     SizedBox(
                       width: getProportionateScreenWidth(9),

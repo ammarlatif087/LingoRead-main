@@ -36,7 +36,7 @@ class _SubcribePlanState extends State<SubcribePlan> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0, 40, 0, 40),
+                  padding: const EdgeInsets.fromLTRB(0, 40, 0, 40),
                   child: Container(
                     padding: EdgeInsets.all(AppConst.padding * 0.5),
                     alignment: Alignment.center,
@@ -56,7 +56,7 @@ class _SubcribePlanState extends State<SubcribePlan> {
                                 onTap: () {
                                   Navigator.pop(context, false);
                                 },
-                                child: Icon(
+                                child: const Icon(
                                   Icons.cancel,
                                   color: Colors.black,
                                   size: 30,
@@ -70,7 +70,7 @@ class _SubcribePlanState extends State<SubcribePlan> {
                                 .textTheme
                                 .headline2!
                                 .copyWith(fontWeight: FontWeight.bold)),
-                        SizedBox(
+                        const SizedBox(
                           height: 14,
                         ),
                         Text(
@@ -82,17 +82,17 @@ class _SubcribePlanState extends State<SubcribePlan> {
                                   fontWeight: FontWeight.bold, fontSize: 14),
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        ShopWidget(
+                        const ShopWidget(
                             'Monthly Plan',
                             'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum',
                             Color(0xffE17614)),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        ShopWidget(
+                        const ShopWidget(
                             'Monthly Plan',
                             'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum',
                             Color(0xff4A00C4)),
@@ -104,7 +104,7 @@ class _SubcribePlanState extends State<SubcribePlan> {
                             width: 200,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(25),
-                                color: Color(0xff00ACC4)),
+                                color: const Color(0xff00ACC4)),
                             child: InkWell(
                               onTap: () {},
                               child: Center(
@@ -113,7 +113,7 @@ class _SubcribePlanState extends State<SubcribePlan> {
                                 style: Theme.of(context).textTheme.headline4,
                               )),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                       ],

@@ -11,7 +11,7 @@ import '../Utils/app_constants.dart';
 import '../Widgets/Buttons/button_main.dart';
 
 class ChangePassword extends StatefulWidget {
-  ChangePassword({Key? key}) : super(key: key);
+  const ChangePassword({Key? key}) : super(key: key);
 
   @override
   State<ChangePassword> createState() => _ChangePasswordState();
@@ -39,7 +39,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   Container loadingwidget() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppConst.padding * 0.25),
           color: Theme.of(context).primaryColor),
@@ -63,7 +63,6 @@ class _ChangePasswordState extends State<ChangePassword> {
       child: Scaffold(
         body: Stack(
           children: [
-            ThemeFooter(),
             Padding(
               padding: EdgeInsets.fromLTRB(AppConst.padding * 1,
                   AppConst.padding * 2, AppConst.padding * 1, 0),
@@ -73,7 +72,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   Row(
                     children: [
                       IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back_ios,
                           color: Color(0xffffffff),
                         ),

@@ -83,7 +83,6 @@ class _OTPVerificationState extends State<OTPVerification> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          ThemeFooter(),
           Padding(
             padding: EdgeInsets.fromLTRB(AppConst.padding * 2,
                 AppConst.padding * 3, AppConst.padding * 2, 0),
@@ -154,7 +153,8 @@ class _OTPVerificationState extends State<OTPVerification> {
                                   Theme.of(context).primaryColorLight,
                               selectedColor: Theme.of(context).primaryColorDark,
                             ),
-                            animationDuration: Duration(milliseconds: 300),
+                            animationDuration:
+                                const Duration(milliseconds: 300),
                             // backgroundColor: Colors.blue.shade50,
                             enableActiveFill: true,
                             // errorAnimationController: errorController,
@@ -180,7 +180,7 @@ class _OTPVerificationState extends State<OTPVerification> {
                               onTap: () {
                                 Loader.show(context,
                                     progressIndicator:
-                                        CircularProgressIndicator());
+                                        const CircularProgressIndicator());
 
                                 print(registerdata);
                                 APIsCallPost.submitRequest("", {

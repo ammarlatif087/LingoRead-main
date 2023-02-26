@@ -7,7 +7,6 @@ import 'package:lingoread/Controllers/Theme/themecontroller.dart';
 import 'package:lingoread/Services/postRequests.dart';
 import 'package:lingoread/Utils/app_funtions.dart';
 import 'package:lingoread/Utils/size_config.dart';
-import 'package:lingoread/Widgets/Drawer/custome_drawer.dart';
 import 'package:lingoread/Widgets/Main/custom_container.dart';
 import 'package:lingoread/Widgets/Profile/profile_data.dart';
 import 'package:lingoread/Widgets/text_widget_heading.dart';
@@ -16,7 +15,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Routes/routes_names.dart';
 import '../Utils/app_constants.dart';
 import '../Utils/constants.dart';
-import '../Widgets/Header/CustomerHeader.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -68,26 +66,59 @@ class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
     return ThemeContainer(
-        child: Scaffold(
-      key: _scaffoldkey,
-      drawer: CustomDrawer(context),
-      body: Column(
-        children: [
-          SizedBox(height: AppConst.padding * 3),
-          CustomerHeader(
-            image: ThemeController.to.isDark.isTrue
-                ? "assets/images/icon_menu_white.png"
-                : "assets/images/icon_menu.png",
-            title: "Profile",
-            onPressed: () {
-              _scaffoldkey.currentState!.openDrawer();
-            },
-          ),
-          SizedBox(
-            height: getProportionateScreenHeight(40),
-          ),
-          Expanded(
-            child: Column(
+        child: SafeArea(
+      child: Scaffold(
+        // drawer: CustomDrawer(context),
+        body: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: getProportionateScreenHeight(18),
+                  horizontal: getProportionateScreenWidth(21)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: getProportionateScreenHeight(45),
+                    width: getProportionateScreenWidth(45),
+                    decoration: BoxDecoration(
+                      color: kButtonColor.withOpacity(.6),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        size: 20,
+                        color: ThemeController.to.isDark.isTrue
+                            ? AppConst.colorWhite
+                            : kButtonColor,
+                      ),
+                      onPressed: () {
+                        Get.back();
+                      },
+                    ),
+                  ),
+                  TextWidgetHeading(
+                    textAlignment: TextAlign.center,
+                    titleHeading: 'Profile',
+                    textStyle: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        fontSize: getProportionateScreenHeight(20),
+                        // letterSpacing: 1,
+                        fontWeight: FontWeight.w600,
+                        color: kTextColorSecondary,
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                      onTap: () {
+                        Get.toNamed(Routes.setting);
+                      },
+                      child: const Icon(Icons.settings))
+                ],
+              ),
+            ),
+            Column(
               children: [
                 Container(
                   decoration: BoxDecoration(
@@ -310,15 +341,61 @@ class _UserProfileState extends State<UserProfile> {
                             learnedStoreis,
                             color: ThemeController.to.isDark.isTrue
                                 ? AppConst.colorWhite
-                                : kButtonColor)
+                                : kButtonColor),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              InkWell(
+                                onTap: () async {
+                                  AppFunctions.logout(context);
+                                },
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 30,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(17),
+                                          color: Colors.white),
+                                      child: Icon(
+                                        Icons.logout,
+                                        color: ThemeController.to.isDark.isTrue
+                                            ? AppConst.colorBlack
+                                            : AppConst.colorPrimaryLight,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      'Logout',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline4!
+                                          .copyWith(
+                                              color: ThemeController
+                                                      .to.isDark.isTrue
+                                                  ? AppConst.colorWhite
+                                                  : AppConst.colorPrimaryLight),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ));
   }
